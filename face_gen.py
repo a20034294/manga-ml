@@ -11,7 +11,6 @@ manga109_root_dir = os.getenv('MANGA109_ROOT_DIR')
 p = manga109api.Parser(root_dir=manga109_root_dir)
 
 book_cnt = 0
-os.mkdir('frame/')
 os.mkdir('face/')
 
 for book in p.books:
@@ -35,7 +34,7 @@ for book in p.books:
                     face_img = img[y + offset:y + w + offset, x:x + w]
                 if face_img.shape[0] >= 50:
                     ok_img = cv2.resize(
-                        face_img, (256, 256), interpolation=cv2.INTER_LANCZOS4)
+                        face_img, (128, 128), interpolation=cv2.INTER_LANCZOS4)
                     face_cnt += 1
                     cv2.imwrite(
                         'face/' + str(book_cnt) + '/' + str(face_cnt) + '.jpg',
@@ -53,7 +52,7 @@ for book in p.books:
                 face_img = img[y + offset:y + w + offset, x:x + w]
             if face_img.shape[0] >= 50:
                 ok_img = cv2.resize(
-                    face_img, (256, 256), interpolation=cv2.INTER_LANCZOS4)
+                    face_img, (128, 128), interpolation=cv2.INTER_LANCZOS4)
                 face_cnt += 1
                 cv2.imwrite(
                     'face/' + str(book_cnt) + '/' + str(face_cnt) + '.jpg',

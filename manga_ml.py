@@ -20,7 +20,7 @@ model.add(
         128,
         5,
         2,
-        input_shape=(256, 256, 1),
+        input_shape=(128, 128, 1),
         activation='relu',
         padding='same'))
 model.add(Conv2D(128, 5, 2, activation='relu', padding='same'))
@@ -43,7 +43,7 @@ model.add(
         units=1024,
         activation='relu',
         kernel_regularizer=regularizers.l2(0.01)))
-model.add(Dense(units=31, activation='sigmoid'))
+model.add(Dense(units=31, activation='softmax'))
 
 model.summary()
 
@@ -58,7 +58,9 @@ for i in range(1, 31):
 
     #break
 
+
 XX = np.array(x)
+
 XXX = XX[:, :, :, 0]
 XXX = XXX[:, :, :, np.newaxis]
 print(XXX)
@@ -83,7 +85,7 @@ train_history = model.fit(
     x=X,
     y=Y,
     validation_split=0.2,
-    epochs=100,
+    epochs=20,
     batch_size=128,
     verbose=2,
     shuffle=True)
