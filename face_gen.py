@@ -5,7 +5,7 @@ import time
 import os
 from dotenv import load_dotenv
 
-load_env()
+load_dotenv()
 
 manga109_root_dir = os.getenv('MANGA109_ROOT_DIR')
 p = manga109api.Parser(root_dir=manga109_root_dir)
@@ -13,7 +13,7 @@ p = manga109api.Parser(root_dir=manga109_root_dir)
 book_cnt = 0
 os.mkdir('face/')
 
-for book in p.books
+for book in p.books:
     book_cnt += 1
     face_cnt = 0
     os.mkdir('face/' + str(book_cnt))
