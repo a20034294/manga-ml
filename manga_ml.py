@@ -20,7 +20,7 @@ model.add(
         128,
         5,
         2,
-        input_shape=(128, 128, 1),
+        input_shape=(256, 256, 1),
         activation='relu',
         padding='same'))
 model.add(Conv2D(128, 5, 2, activation='relu', padding='same'))
