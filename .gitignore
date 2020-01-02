@@ -1,3 +1,4 @@
 .env
 manga_model*
 face/*
+*.swp
