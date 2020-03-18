@@ -1,4 +1,7 @@
 .env
 manga_model*
 face/*
+body/*
 *.swp
+__pycache__/*
+kerasspp/*
