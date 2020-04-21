@@ -67,7 +67,7 @@ for book in p.books:
                 x, y = body["@xmin"], body["@ymin"]
                 w = body["@xmax"] - x
                 h = body["@ymax"] - y
-                body_img = img
+                body_img = img[y:y + h, x:x + w]
                 if body_img.shape[0] >= 50 and body_img.shape[1] >= 50:
                     ok_img = cv2.resize(
                         body_img, (128, 128), interpolation=cv2.INTER_LANCZOS4)
@@ -80,7 +80,7 @@ for book in p.books:
             x, y = body["@xmin"], body["@ymin"]
             w = body["@xmax"] - x
             h = body["@ymax"] - y
-            body_img = img
+            body_img = img[y:y + h, x:x + w]
             if body_img.shape[0] >= 50 and body_img.shape[1] >= 50:
                 ok_img = cv2.resize(
                     body_img, (128, 128), interpolation=cv2.INTER_LANCZOS4)

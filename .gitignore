@@ -5,3 +5,4 @@ body/*
 *.swp
 __pycache__/*
 kerasspp/*
+.*
