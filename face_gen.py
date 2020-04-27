@@ -4,15 +4,20 @@ import cv2
 import time
 import os
 from dotenv import load_dotenv
+import numpy as np
 
 load_dotenv()
+TEST_RATIO = 0.1
 
 manga109_root_dir = os.getenv('MANGA109_ROOT_DIR')
 p = manga109api.Parser(root_dir=manga109_root_dir)
 
 book_cnt = 0
+os.system('rm -r face body')
 os.mkdir('face/')
 os.mkdir('body/')
+face_train = open("face_training_set.txt", "w")
+face_test = open("face_test_set.txt", "w")
 
 for book in p.books:
     book_cnt += 1
@@ -42,6 +47,11 @@ for book in p.books:
                     cv2.imwrite(
                         'face/' + str(book_cnt) + '/' + str(face_cnt) + '.jpg',
                         ok_img)
+                    if np.random.rand() < TEST_RATIO:
+                        face_test.write('face/' + str(book_cnt) + '/' + str(face_cnt) + '.jpg ' + str(book_cnt) + '\n')
+                    else:
+                        face_train.write('face/' + str(book_cnt) + '/' + str(face_cnt) + '.jpg ' + str(book_cnt) + '\n')
+
         if "face" in page.keys() and type(page["face"]) is dict:
             face = page["face"]
             x, y = face["@xmin"], face["@ymin"]
@@ -60,6 +70,10 @@ for book in p.books:
                 cv2.imwrite(
                     'face/' + str(book_cnt) + '/' + str(face_cnt) + '.jpg',
                     ok_img)
+                if np.random.rand() < TEST_RATIO:
+                    face_test.write('face/' + str(book_cnt) + '/' + str(face_cnt) + '.jpg ' + str(book_cnt) + '\n')
+                else:
+                    face_train.write('face/' + str(book_cnt) + '/' + str(face_cnt) + '.jpg ' + str(book_cnt) + '\n')
 
         if "body" in page.keys() and type(page["body"]) is list:
             for body in page["body"]:

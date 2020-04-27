@@ -6,3 +6,4 @@ body/*
 __pycache__/*
 kerasspp/*
 .*
+*.txt

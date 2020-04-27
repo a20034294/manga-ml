@@ -14,21 +14,22 @@ model.summary()
 list_IDs = []
 labels = []
 
-for i in range(1, 91):
-    dirs = os.listdir('face/' + str(i))
-    for file in dirs:
-        if file[0] == '.':
-            continue
-        list_IDs.append('face/' + str(i) + '/' + file)
-        one_hot = to_categorical(i, 91)
-        labels.append(one_hot)
+f = open('face_training_set.txt')
+lines = f.readlines()
+for line in lines:
+    data = line.split(' ')
+    if int(data[1]) == 91:
+        break
+    list_IDs.append(data[0])
+    one_hot = to_categorical(int(data[1]), 91)
+    labels.append(one_hot)
 
 # Shuffle IDs
 from sklearn.utils import shuffle
-list_IDs_shu, labels_shu = shuffle(list_IDs, labels, random_state=0)
+list_IDs_shu, labels_shu = shuffle(list_IDs, labels, random_state=None)
 
 from sklearn.model_selection import train_test_split
-seed = 7 # 確保相同的驗證集分割
+seed = 9487 # 確保相同的驗證集分割
 IDs_train, IDs_val, labels_train, labels_val = train_test_split(list_IDs_shu, labels_shu, test_size=0.2, random_state=seed)
 
 print(len(IDs_train))
@@ -55,7 +56,7 @@ train_history = model.fit_generator(
     validation_data=validation_generator,
     use_multiprocessing=True,
     workers=32,
-    epochs=20,
+    epochs=5,
     verbose=2,
     shuffle=True)
 
