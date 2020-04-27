@@ -29,7 +29,7 @@ list_IDs_shu, labels_shu = shuffle(list_IDs, labels, random_state=None)
 
 from DataGenerator import DataGenerator
 params = {'dim': (128, 128),
-          'batch_size': 3000,
+          'batch_size': len(labels),
           'n_classes': 91,
           'n_channels': 1,
           'shuffle': True}
